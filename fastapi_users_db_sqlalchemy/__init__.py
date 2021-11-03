@@ -6,7 +6,7 @@ from databases import Database
 from fastapi_users.db.base import BaseUserDatabase
 from fastapi_users.models import UD
 from pydantic import UUID4
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table, func, select
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table, func, select, ARRAY
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.types import CHAR, TypeDecorator
@@ -63,6 +63,7 @@ class SQLAlchemyBaseUserTable:
     is_active = Column(Boolean, default=True, nullable=False)
     is_superuser = Column(Boolean, default=False, nullable=False)
     is_verified = Column(Boolean, default=False, nullable=False)
+    scopes = Column(ARRAY(String))
 
 
 class SQLAlchemyBaseOAuthAccountTable:
